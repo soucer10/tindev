@@ -1,11 +1,15 @@
 import React from  'react'
-import {Text, View, StyleSheet, Image, TextInput,Button,TouchableOpacity} from 'react-native'
+import {Text, KeyboardAvoidingView, Platform,StyleSheet, Image, TextInput,Button,TouchableOpacity} from 'react-native'
 
 import Logo from '../assets/logo.png'
 
 
 export default function Login(){
-    return(<View style={styles.container}>
+    return(<KeyboardAvoidingView style={styles.container}
+            behavior='padding'
+            enabled={Platform.OS==='ios'}
+
+    >
         <Image source={Logo}/>
         <TextInput placeholder="Digite seu usuário do Github"
             placeholderTextColor='#999'
@@ -16,11 +20,9 @@ export default function Login(){
         <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Enviar</Text>
         </TouchableOpacity>
-    </View>)
+    </KeyboardAvoidingView>)
        
 }
-
-
 
 const styles=StyleSheet.create({
 
