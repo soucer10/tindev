@@ -13,7 +13,7 @@ import itsamatch from '../assets/itsamatch.png'
 
 export default function Main({match}){
     const [users,setUsers]=useState([]);
-    const [matchDev,setMatchDev]=useState(1)
+    const [matchDev,setMatchDev]=useState(null)
 
     useEffect(()=>{
         async function loadUsers(){
@@ -34,7 +34,7 @@ export default function Main({match}){
             query:{user:match.params.id}
         })
         socket.on('match',dev=>{
-            console.log(dev)
+            setMatchDev(dev)
         })
      
     },[match.params.id])
@@ -85,9 +85,11 @@ export default function Main({match}){
             <div className='match-isContainer'>
 
                 <img src={itsamatch} alt="It's a match"/>
-                <img className="avatar" src='https://avatars1.githubusercontent.com/u/9316527?v=4' alt="" ></img>
-                <strong>Hugo Bicudo</strong>   
-                <p>A minha Magrelinha é a belinha</p>  
+                <img className="avatar" src={matchDev.avatar} alt="" ></img>
+                <strong>{matchDev.name}</strong>   
+                <p>{matchDev.bio}</p>  
+
+                <button type='button' onClick={()=> setMatchDev(null)}>FECHAR</button>
             </div>
          )}
      </div>
